@@ -73,7 +73,7 @@
             var ctxx = []
             for (let canvas of cvs) {
                 var ctx = canvas.getContext('2d');
-                ctx.canvas.width = 650//window.innerWidth;
+                ctx.canvas.width = 665//window.innerWidth;
                 ctx.canvas.height = 1400//window.innerHeight;
                 ctxx.push(ctx)
             }
@@ -81,7 +81,7 @@
                 let imageObj = new Image();
                 imageObj.onload = function () {
                     for (let i = 0; i < 3; i++) {
-                        ctxx[i + p * 3].drawImage(imageObj, 650 * i, 0, 650, 1400, 0, 0, 650, 1400);
+                        ctxx[i + p * 3].drawImage(imageObj, 665 * i, 0, 665, 1400, 0, 0, 665, 1400);
                     }
                 };
                 imageObj.src = `booklet${p + 1}.png`;
