@@ -11,12 +11,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
+        .container{width: 80%;}
         .headertxt{
              font-weight: 900;
              font-size:20px;
         }
         canvas {
-            width: 320px;
+            width: 390px;
         }
         .wrapper1 {
             display: grid;
@@ -26,7 +27,7 @@
 
         .wrapper {
             display: grid;
-            grid-template-columns:  repeat(auto-fill, minmax(320px, 320px));
+            grid-template-columns:  repeat(auto-fill, minmax(390px, 390px));
             grid-gap: 0px;
         }
 
@@ -69,26 +70,36 @@
         </div>
         <img style='display:none;' id='img' />
         <script>
+            var imgw=[1138,2330,3508,1195,2363,3508]
+            var cw=[1138,1192,1182,1138,1168,1145]
             var cvs = []
             for (let i = 0; i < 6; i++) {
                 let canvas1 = document.getElementById(`bl${i}_canvas`);
                 cvs.push(canvas1)
             }
             var ctxx = []
-            for (let canvas of cvs) {
-                var ctx = canvas.getContext('2d');
-                ctx.canvas.width = 665//window.innerWidth;
-                ctx.canvas.height = 1400//window.innerHeight;
+
+            for (let i=0;i<cvs.length;i++){
+                var ctx = cvs[i].getContext('2d');
+                ctx.canvas.width = cw[i]//window.innerWidth;
+                ctx.canvas.height = 2481//window.innerHeight;
                 ctxx.push(ctx)
             }
+
             for (let p = 0; p < 2; p++) {
                 let imageObj = new Image();
                 imageObj.onload = function () {
                     for (let i = 0; i < 3; i++) {
-                        ctxx[i + p * 3].drawImage(imageObj, 665 * i, 0, 665, 1400, 0, 0, 665, 1400);
+                        let w1=i+p*3>0?imgw[i+p*3-1]:0;
+                        if (i==0) w1=0
+                        let w2=cw[i+p*3];
+                        console.log(i + p * 3);
+                        console.log( ctxx[i + p * 3]);
+                        ctxx[i + p * 3].drawImage(imageObj, w1, 0, w2, 2481, 0, 0, w2, 2481);
                     }
                 };
-                imageObj.src = `booklet${p + 1}.png`;
+                console.log(`booklet${p + 1}.jpg`)
+                imageObj.src = `booklet${p + 1}.jpg`;
             }
         </script>
         <footer>
